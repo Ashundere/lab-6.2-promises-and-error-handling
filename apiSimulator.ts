@@ -21,8 +21,10 @@ export const fetchProductReviews = (productId: number): Promise<{ id: number; na
     setTimeout(() => {
         if (Math.random() < 0.8) {
         resolve([
-            { id: productId, name: "Devon", comment: "It works great!" },
-            { id: productId, name: "Anthony", comment: "I hate it." },
+            { id: 1, name: "Devon", comment: "It works great!" },
+            { id: 1, name: "Anthony", comment: "I hate it." },
+            { id: 2, name: "Damian", comment: "Great Volume!" },
+            { id: 2, name: "Tim", comment: "They look cool." },
         ]);
         } else {
         reject(`Failed to fetch reviews for product ID ${productId}`);
@@ -43,4 +45,5 @@ export const fetchSalesReport = (): Promise<{ totalSales: number; unitsSold: num
         reject("Failed to fetch sales report");
         }
     }, 1500);
-    });
+    })
+};
