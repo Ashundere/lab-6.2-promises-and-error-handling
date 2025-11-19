@@ -1,6 +1,17 @@
 
+class ValidationError extends Error{
+    constructor(message: string){
+        super(message);
+        this.name = "ValidationError"
+    }
+}
 
-
+class DataError extends Error{
+    constructor(message: string){
+        super(message);
+        this.name = "DataError"
+    }
+}
 export const fetchProductCatalog = (): Promise<{ id: number; name: string; price: number }[]> => {
     return new Promise((resolve, reject) => {
     setTimeout(() => {
@@ -10,7 +21,7 @@ export const fetchProductCatalog = (): Promise<{ id: number; name: string; price
             { id: 2, name: "Headphones", price: 200 },
         ]);
         } else {
-        reject("Failed to fetch product catalog");
+        reject(new ValidationError("Failed to fetch product catalog"));
         }
     }, 1000);
     });
@@ -27,7 +38,7 @@ export const fetchProductReviews = (productId: number): Promise<{ id: number; na
             { id: 2, name: "Tim", comment: "They look cool." },
         ]);
         } else {
-        reject(`Failed to fetch reviews for product ID ${productId}`);
+        reject(new DataError(`Failed to fetch reviews for product ID ${productId}`));
         }
     }, 1500);
     });
@@ -42,7 +53,7 @@ export const fetchSalesReport = (): Promise<{ totalSales: number; unitsSold: num
             { totalSales: 200, unitsSold: 20, averagePrice: 10},
         ]);
         } else {
-        reject("Failed to fetch sales report");
+        reject( new ValidationError("Failed to fetch sales report"));
         }
     }, 1500);
     })

@@ -1,6 +1,42 @@
-export const fetchProductCatalog = () => {
-    return new Promise((resolve, reject) => {
-        setTimeout(() => {
+"use strict";
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.fetchSalesReport = exports.fetchProductReviews = exports.fetchProductCatalog = void 0;
+var ValidationError = /** @class */ (function (_super) {
+    __extends(ValidationError, _super);
+    function ValidationError(message) {
+        var _this = _super.call(this, message) || this;
+        _this.name = "ValidationError";
+        return _this;
+    }
+    return ValidationError;
+}(Error));
+var DataError = /** @class */ (function (_super) {
+    __extends(DataError, _super);
+    function DataError(message) {
+        var _this = _super.call(this, message) || this;
+        _this.name = "DataError";
+        return _this;
+    }
+    return DataError;
+}(Error));
+var fetchProductCatalog = function () {
+    return new Promise(function (resolve, reject) {
+        setTimeout(function () {
             if (Math.random() < 0.8) {
                 resolve([
                     { id: 1, name: "Laptop", price: 1200 },
@@ -8,14 +44,15 @@ export const fetchProductCatalog = () => {
                 ]);
             }
             else {
-                reject("Failed to fetch product catalog");
+                reject(new ValidationError("Failed to fetch product catalog"));
             }
         }, 1000);
     });
 };
-export const fetchProductReviews = (productId) => {
-    return new Promise((resolve, reject) => {
-        setTimeout(() => {
+exports.fetchProductCatalog = fetchProductCatalog;
+var fetchProductReviews = function (productId) {
+    return new Promise(function (resolve, reject) {
+        setTimeout(function () {
             if (Math.random() < 0.8) {
                 resolve([
                     { id: 1, name: "Devon", comment: "It works great!" },
@@ -25,14 +62,15 @@ export const fetchProductReviews = (productId) => {
                 ]);
             }
             else {
-                reject(`Failed to fetch reviews for product ID ${productId}`);
+                reject(new DataError("Failed to fetch reviews for product ID ".concat(productId)));
             }
         }, 1500);
     });
 };
-export const fetchSalesReport = () => {
-    return new Promise((resolve, reject) => {
-        setTimeout(() => {
+exports.fetchProductReviews = fetchProductReviews;
+var fetchSalesReport = function () {
+    return new Promise(function (resolve, reject) {
+        setTimeout(function () {
             if (Math.random() < 0.8) {
                 resolve([
                     { totalSales: 500, unitsSold: 20, averagePrice: 25 },
@@ -40,9 +78,9 @@ export const fetchSalesReport = () => {
                 ]);
             }
             else {
-                reject("Failed to fetch sales report");
+                reject(new ValidationError("Failed to fetch sales report"));
             }
         }, 1500);
     });
 };
-//# sourceMappingURL=apiSimulator.js.map
+exports.fetchSalesReport = fetchSalesReport;
